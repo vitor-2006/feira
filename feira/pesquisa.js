@@ -1,7 +1,7 @@
 import { Produto } from "./schema.js";
 
 function escapeRegex(text) {
-    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '');
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 }
 
 export const pesqPorIdBaralho = async (idBaralho) => {
