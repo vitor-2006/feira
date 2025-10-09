@@ -1,10 +1,10 @@
 import { Produto } from "./schema.js"
 
-export const updateProduto = async (id, idBarraca, nome, preco) => {
+export const updateProduto = async (id, nome, preco) => {
     try {
         const updatedProduto = await Produto.findByIdAndUpdate(
             id,
-            { idBarraca, nome, preco },
+            { nome, preco },
             { new:true, runValidators:true }
         )
         return updatedProduto

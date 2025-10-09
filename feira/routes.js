@@ -27,7 +27,7 @@ routesProduto.post('/produto', async (req, res) => {
 
 routesProduto.put('/produto/:id', async (req, res) => {
     const { id } = req.params
-    const { idBarraca, nome, preco } = req.body
+    const { nome, preco } = req.body
     const updatedProduto = await updateProduto(id, idBarraca, nome, preco)
     if(!updatedProduto) {
         return res.status(404).send({ message: 'Produto não encontrado ou inválido' })
