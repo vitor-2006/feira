@@ -1,6 +1,6 @@
 import { Produto } from "./schema.js"
 
-export const getProduto = async (req, res) => {
+export const getProduto = async () => {
     try {
         return await Produto.find()
     } catch (error) {
