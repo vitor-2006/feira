@@ -4,10 +4,12 @@ import { createProduto } from './post.js';
 import { updateProduto } from "./put.js"
 import { deleteProduto } from './delete.js';
 import { pesqPorIdBaralho, pesqPorNome, pesqPorPreco } from './pesquisa.js';
-
 const routesProduto  = express.Router();
 
-routesProduto.get('/produto', async (req, res) => {
+
+console.log("here")
+
+routesProduto.get('/produtos', async (req, res) => {
     const Produtos = await getProduto()
     if(Produtos) {
         return res.status(200).send(Produtos)
