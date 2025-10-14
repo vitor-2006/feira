@@ -9,7 +9,7 @@ const routesProduto  = express.Router();
 
 console.log("here")
 
-routesProduto.get('/produtos', async (req, res) => {
+routesProduto.get('/produto', async (req, res) => {
     const Produtos = await getProduto()
     if(Produtos) {
         return res.status(200).send(Produtos)
@@ -30,7 +30,7 @@ routesProduto.post('/produto', async (req, res) => {
 routesProduto.put('/produto/:id', async (req, res) => {
     const { id } = req.params
     const { nome, preco } = req.body
-    const updatedProduto = await updateProduto(id, idBarraca, nome, preco)
+    const updatedProduto = await updateProduto(id, nome, preco)
     if(!updatedProduto) {
         return res.status(404).send({ message: 'Produto não encontrado ou inválido' })
     }
