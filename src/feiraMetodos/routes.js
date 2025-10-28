@@ -4,12 +4,11 @@ import { createProduto } from './post.js';
 import { updateProduto } from "./put.js"
 import { deleteProduto } from './delete.js';
 import { pesqPorIdBaralho, pesqPorNome, pesqPorPreco } from './pesquisa.js';
+import { middleWare } from '../middleware/authentication.js';
+
 const routesProduto  = express.Router();
 
-
-console.log("here")
-
-routesProduto.get('/produto', async (req, res) => {
+routesProduto.get('/produto', middleWare, async (req, res) => {
     const Produtos = await getProduto()
     if(Produtos) {
         return res.status(200).send(Produtos)
@@ -18,7 +17,7 @@ routesProduto.get('/produto', async (req, res) => {
     }
 });
 
-routesProduto.post('/produto', async (req, res) => {
+routesProduto.post('/produto', middleWare, async (req, res) => {
     const { idBarraca, nome, preco } = req.body
     const newProduto = await createProduto(idBarraca, nome, preco)
     if(!newProduto) {
@@ -27,7 +26,7 @@ routesProduto.post('/produto', async (req, res) => {
     return res.status(201).send({ message: 'Produto criado com sucesso', produto: newProduto })
 });
 
-routesProduto.put('/produto/:id', async (req, res) => {
+routesProduto.put('/produto/:id', middleWare, async (req, res) => {
     const { id } = req.params
     const { nome, preco } = req.body
     const updatedProduto = await updateProduto(id, nome, preco)
@@ -37,7 +36,7 @@ routesProduto.put('/produto/:id', async (req, res) => {
     return res.status(200).send({ message: 'Produto atualizado com sucesso', produto: updatedProduto })
 });
 
-routesProduto.delete('/produto/:id', async (req, res) => {
+routesProduto.delete('/produto/:id', middleWare, async (req, res) => {
     const { id } = req.params
     const deletedProduto = deleteProduto(id)
     if(deletedProduto) {
@@ -47,7 +46,7 @@ routesProduto.delete('/produto/:id', async (req, res) => {
     }
 });
 
-routesProduto.get('/produto/search', async (req, res) => {
+routesProduto.get('/produto/search', middleWare, async (req, res) => {
     const { idBaralho, nome, preco } = req.query
     let searchProduto 
     if(idBaralho) {
